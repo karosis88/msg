@@ -1,0 +1,112 @@
+:root {
+    --input-color: #d1d0c5;
+    --button-bg: #2c2e31;
+    --button-txt: #d1d0c5
+}
+
+.auth-title {
+    color: var(--input-color);
+    font-family: sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.auth-input {
+    font-size: 16px;
+    padding: 10px 50px 10px 10px;
+    border-radius: 10px;
+    color: var(--input-color);
+    background-color: var(--button-bg);
+    margin-top: 8px;
+    width: 250px;
+}
+
+[type="submit"] {
+    cursor: pointer;
+}
+
+.auth {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 200px;
+    margin-right: 140px;
+}
+
+.input-line {
+    position: relative;
+    padding-right: 25px;
+}
+
+.error-icon {
+    width: 18px;
+    position: absolute;
+    top: calc(50% + 4px);
+    right: 0%;
+    transform: translateY(-50%) translateX(-40px);
+    background-color: transparent;
+}
+
+[ic="loading"] {
+    animation: loading 1s linear infinite;
+
+}
+
+.dnone {
+    display: none;
+}
+
+input[type="submit"] {
+    padding-right: 0px;
+}
+
+input[type="submit"]:hover {
+    background-color: var(--input-color);
+    color: var(--button-bg);
+    transition: .5s;
+}
+
+.errMessage {
+    position: absolute;
+    top: -90%;
+    right: -28%;
+    display: none;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    opacity: 70%;
+    z-index: 1000;
+    text-align: center;
+    width: 250px;
+}
+
+.errMessage::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    display: block;
+    background-color: black;
+    left: 50%;
+    transform: translateX(-50%) rotate(-45deg);
+
+}
+
+[ic="close"]:hover ~ .errMessage {
+    display: block;
+}
+
+.disabled-button, .disabled-button:hover, .disabled-button:focus {
+    background-color: #444444 !important;
+    cursor: initial !important;
+    color: var(--input-color) !important;
+}
+
+@keyframes loading {
+    0% {
+        transform: translateY(-50%) translateX(-40px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-50%) translateX(-40px) rotate(360deg);
+    }
+}

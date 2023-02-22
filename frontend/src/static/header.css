@@ -1,0 +1,151 @@
+:root {
+    --input-color: #d1d0c5;
+    --button-bg: #2c2e31;
+    --button-txt: #d1d0c5
+}
+
+.search-icon {
+    width: 18px;
+    position: absolute;
+    background-color: transparent;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.search-bar::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 1px;
+    background-color: #878787;
+    left: 40px;
+    top: 50%;
+    height: 60%;
+    transform: translateY(-50%);
+}
+
+.search-bar {
+    background-color: var(--input-color);
+    height: 40px;
+    position: relative;
+}
+
+.search-bar-wrapper {
+    position: relative;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.search-bar-input {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 85%;
+}
+
+.search-bar-input:focus {
+    border: none;
+    outline: none;
+}
+
+.search-bar-result {
+    display: block;
+    color: black;
+    width: 100%;
+    background-color: var(--input-color);
+
+}
+
+.search-bar-result:hover > .search-bar-result-text {
+    background-color: #c9c8be ;
+}
+
+.search-bar-result-text {
+    display: block;
+    width: 100%;
+    background-color: transparent;
+}
+
+.search-bar, .search-bar-result {
+    padding: 5px 10px;
+}
+
+.header {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.profile-picture {
+    position: relative;
+}
+
+.profile-picture:hover > .dropmenu {
+    height: 300px;
+}
+
+.profile-icon {
+    border-radius: 100%;
+    background-color: var(--input-color);
+}
+
+.icon {
+    width: 20px;
+}
+
+.all-results {
+    position: absolute;
+    width: 100%;
+}
+
+.header-element {
+    width: 20px;
+    margin: 0 20px;
+}
+
+.icon:hover {
+    opacity: 50%;
+    transition: opacity .5s;
+}
+
+.element-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 15%;
+}
+
+.dropdown-field {
+    background-color: var(--button-bg);
+    color: var(--button-txt);
+    display: flex;
+    justify-content: space-around;
+    font-family: sans-serif;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.dropdown-field:hover {
+    color: var(--button-bg);
+    background-color: var(--button-txt);
+    transition: .5s;
+}
+
+.dropmenu {
+    display: block;
+    width: 200px;
+    height: 0px;
+    position: absolute;
+    right: -220px;
+    top: 0;
+    transition: height .5s;
+    overflow: hidden;
+}
+
+.auth-input {
+
+}
+
