@@ -60,12 +60,12 @@ def create_user(username: str, password: str):
         try:
             session.commit()
         except sqlalchemy.exc.IntegrityError:
-            return HTTPException(status_code=400, detail="This username already used")
+            return HTTPException(status_code=400, detail={"username": "This username already used"})
         return user.id
+
 
 def find_user(username: str):
     stmt = select(User).where(User.username.ilike(f"%{username}%"))
     with SessionLocal() as session:
         users = session.scalars(stmt).all()
         return users
-

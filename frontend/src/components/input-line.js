@@ -118,9 +118,10 @@ function enableButton(input) {
 }
 
 const InputLine = (props) => {
+
     const [errorMessages, setErrorMessages] = useState({})
     return (
-        <div className="input-line">
+        <div reg={props.rg} className="input-line" error={props.error}>
             <input className="auth-input" {...props} onChange=
                 {(event) => inputHandler(event.currentTarget, props.placeholder, errorMessages, setErrorMessages)}/>
             { props.type !== 'submit' &&

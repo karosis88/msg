@@ -102,6 +102,29 @@ input[type="submit"]:hover {
     color: var(--input-color) !important;
 }
 
+.input-line::before {
+    content: '* ' attr(error);
+    color: red;
+    opacity: 0%;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: calc(50% + 5px);
+    right: -20px;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    white-space: nowrap;
+    transition: opacity 2s;
+}
+
+.input-line[reg="log"]::before {
+    left: -30px;
+}
+
+.visible-error::before {
+    opacity: 100%;
+}
+
 @keyframes loading {
     0% {
         transform: translateY(-50%) translateX(-40px) rotate(0deg);
