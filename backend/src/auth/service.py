@@ -8,6 +8,9 @@ from sqlalchemy import select
 from database import SessionLocal
 from .config import SECRET_KEY
 from .models import User
+from .models import Friends
+from .models import FRIEND_STATE
+from sqlalchemy import update
 
 
 def hash(data: str):
@@ -88,3 +91,33 @@ def find_user(username: str):
     with SessionLocal() as session:
         users = session.scalars(stmt).all()
         return users
+
+
+def add_friend_request(user: int, requested_user: int):
+    with SessionLocal() as session:
+        session.add(Friends(user=user, requested_user=requested_user, state=FRIEND_STATE.REQUESTED))
+        session.commit()
+
+
+def approve_request(user: int, requested_user: int):
+    stmt = update(Friends).values({"state": "Approved"}).where(
+        Friends.user == user,
+        Friends.requested_user == requested_user
+    )
+    with SessionLocal() as session:
+        session.execute(stmt)
+        session.commit()
+
+
+def get_friend_request_list_by_id(user: int):
+    stmt = select(Friends).where(Friends.requested_user == user)
+    with SessionLocal() as session:
+        requests = session.scalars(stmt).all()
+        return requests
+
+
+def get_my_friend_request_list_by_id(user: int):
+    stmt = select(Friends).where(Friends.requested_user == user)
+    with SessionLocal() as session:
+        requests = session.scalars(stmt).all()
+        return requests

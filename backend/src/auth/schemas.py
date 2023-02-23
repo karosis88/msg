@@ -1,8 +1,8 @@
-from typing import Union
+from datetime import datetime
+from enum import Enum
 
 from pydantic import BaseModel
 from pydantic import Field
-from datetime import datetime
 
 
 class UserCreate(BaseModel):
@@ -15,6 +15,16 @@ class UserView(BaseModel):
     created_at: datetime
     last_login: datetime
     id: int
+
+    class Config:
+        orm_mode = True
+
+
+class FriendRequest(BaseModel):
+    user1: int = Field(alias="user")
+    user2: int = Field(alias="requested_user")
+    created_at: datetime
+    state: Enum
 
     class Config:
         orm_mode = True

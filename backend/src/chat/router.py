@@ -35,7 +35,6 @@ def messages(
 
     return get_messages(chat_id.id)
 
-
 @router.post("/message")
 def send_message(
         content: str,

@@ -64,7 +64,7 @@ const Chat = (props) => {
     }, [])
 
     useEffect(() => {
-        document.querySelector('.messages').scrollTop=1000
+        document.querySelector('.messages').scrollTop=document.querySelector('.messages').scrollHeight
     }, [messages])
 
     return (

@@ -12,5 +12,5 @@ def get_user_id(token: str = Depends(oauth)):
     return user_id
 
 
-def get_user(user_id = Depends(get_user_id)):
+def get_user(user_id=Depends(get_user_id)):
     return get_user_object(user_id)
