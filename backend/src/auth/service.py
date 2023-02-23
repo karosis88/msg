@@ -19,7 +19,7 @@ def authenticate(username: str, password: str):
         stmt = select(User).where(User.username == username)
         user = session.scalar(stmt)
         if not user or hash(password) != user.password:
-            raise HTTPException(status_code=403, detail="Access denied: Invalid username or password")
+            raise HTTPException(status_code=403, detail={"username": "Invalid username or password"})
         return user
 
 
@@ -45,6 +45,25 @@ def decode_jwt(data: dict):
     return jwt.decode(data, SECRET_KEY)
 
 
+def get_user_by_id(id_: int):
+    with SessionLocal() as session:
+        stmt = select(User).where(User.id == id_)
+        print(stmt)
+        user = session.scalar(stmt)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        return user
+
+
+def get_user_by_username(username: str):
+    with SessionLocal() as session:
+        stmt = select(User).where(User.username == username)
+        user = session.scalar(stmt)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        return user
+
+
 def get_user_object(user_id: int):
     with SessionLocal() as session:
         stmt = select(User).where(User.id == user_id)
@@ -60,7 +79,7 @@ def create_user(username: str, password: str):
         try:
             session.commit()
         except sqlalchemy.exc.IntegrityError:
-            return HTTPException(status_code=400, detail={"username": "This username already used"})
+            raise HTTPException(status_code=400, detail={"username": "This username already used"})
         return user.id
 
 

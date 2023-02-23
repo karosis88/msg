@@ -2,6 +2,7 @@ from fastapi import Depends
 from sqlalchemy import or_, select
 
 from auth.dependencies import get_user_id
+from auth.service import get_user_by_username
 from chat.models import Chat
 from database import SessionLocal
 

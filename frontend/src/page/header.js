@@ -31,6 +31,7 @@ const Header = () => {
         }
     }, [value])
 
+    let credentials = JSON.parse(localStorage.getItem("credentials"))
     return (
         <div className="header">
             <div className="search-bar-wrapper">
@@ -56,9 +57,11 @@ const Header = () => {
                 </div>
 
                 <div className="profile-picture header-element">
+
                     <a href="">
                         <img className="profile-icon icon" src={profileicon}/>
                     </a>
+                    { !credentials ?
                     <div className="dropmenu">
                           <a href="/auth" className="dropdown-field">
                                 Sign Up
@@ -66,7 +69,20 @@ const Header = () => {
                           <a href="/auth" className="dropdown-field">
                                 Log In
                           </a>
+                    </div> :
+                        <div className="dropmenu">
+                          <a href="/me" className="dropdown-field">
+                              {credentials.username}
+                          </a>
+                          <a onClick={() => {
+                            localStorage.removeItem('credentials')
+                          }
+                          } href="/" className="dropdown-field">
+                                Log Out
+                          </a>
                     </div>
+
+                    }
                 </div>
             </div>
 

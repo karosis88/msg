@@ -14,6 +14,7 @@ class UserView(BaseModel):
     username: str = Field(min_length=4, max_length=30)
     created_at: datetime
     last_login: datetime
+    id: int
 
     class Config:
         orm_mode = True

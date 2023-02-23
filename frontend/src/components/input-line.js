@@ -103,7 +103,7 @@ function inputHandler(element, type, err, seterr) {
 }
 
 function enableButton(input) {
-    let button = input.parentElement.parentElement.lastChild.firstChild
+    let button = input.parentElement.parentElement.lastChild.previousSibling.firstChild
     let all_inputs = document.querySelectorAll(`input[rg="${input.getAttribute('rg')}"]`)
     for (let i = 0; i < all_inputs.length; i++) {
         let element = all_inputs[i]

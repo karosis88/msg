@@ -15,6 +15,7 @@ class Chat(Base):
     user2 = Column(Integer, ForeignKey("users.id"))
     created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime, default=datetime.now(), onupdate=datetime.now())
+    messages = relationship('Message', back_populates="chat")
 
     __table_args__ = (UniqueConstraint("user1", "user2", name="uscom"),)
 
@@ -25,7 +26,7 @@ class Message(Base):
     id = Column(Integer, primary_key=True)
     chat_id = Column(Integer, ForeignKey("chats.id"))
     content = Column(String)
-    chat = relationship('Chat', backref='messages', foreign_keys=[])
+    chat = relationship('Chat', back_populates='messages', foreign_keys=[])
     owner_id = Column(Integer, ForeignKey("users.id"))
     owner = relationship("User")
     created_at = Column(DateTime, default=datetime.now())

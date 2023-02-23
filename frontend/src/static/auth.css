@@ -118,11 +118,18 @@ input[type="submit"]:hover {
 }
 
 .input-line[reg="log"]::before {
-    left: -30px;
+    left: -200px;
 }
 
 .visible-error::before {
     opacity: 100%;
+}
+
+.acc-created {
+    color: #30b130;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
 }
 
 @keyframes loading {

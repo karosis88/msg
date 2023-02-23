@@ -1,0 +1,104 @@
+:root {
+    --input-color: #d1d0c5;
+    --button-bg: #2c2e31;
+    --button-txt: #d1d0c5
+}
+
+.chat {
+    width: 500px;
+    height: 400px;
+    background-color: var(--button-bg);
+    margin-top: 100px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.messages {
+    height: 80%;
+    background-color: transparent;
+    overflow: auto;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.area-wrapper {
+    height: 20%;
+    display: flex;
+    align-content: center;
+    background-color: transparent;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: relative;
+    top: 25px;
+}
+
+.txt-area{
+    padding: 10px;
+    height: 30px;
+    overflow: hidden;
+    resize: none;
+    width: 80%;
+    color: var(--input-color);
+}
+
+.send-button {
+    color: var(--input-color);
+    width: 50px;
+    transition: background-color, color .5s;
+}
+
+.area-size {
+    margin: 0 10px;
+    height: 20%;
+    background-color: transparent;
+}
+
+.message-size {
+    margin: 0px 20px 0;
+    max-width: 80%;
+    background-color: transparent;
+    display: inline-block;
+    flex-direction: column;
+}
+.message-size:first-child > .message {
+    margin-top: 0px;
+}
+
+.message {
+    position: relative;
+    color: var(--input-color);
+    background-color: #525252;
+    padding: 13px;
+    border-radius: 15px;
+    margin-top: 20px;
+    min-width: 150px;
+}
+
+.message-username {
+    background-color: transparent;
+    color: #101010;
+}
+
+.message-text {
+    margin-top: 8px;
+    width: 100%;
+    background-color: transparent;
+}
+
+.self-message {
+    display: flex;
+    width: 450px;
+    justify-content: flex-end;
+}
+
+.send-button:hover {
+    background-color: var(--input-color);
+    color: var(--button-bg);
+    cursor: pointer;
+}
+
+.message-row-wrapper {
+    word-break: break-all;
+    background-color: transparent;
+}

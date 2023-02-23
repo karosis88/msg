@@ -4,26 +4,26 @@ import InputLine from "./input-line";
 
 async function login(event, errors, setErrors) {
     let element = event.currentTarget
-    let username = element.parentElement.previousSibling.previousSibling.previousSibling.firstChild.value
+
+    if (element.classList.contains('disabled-button'))
+        return
+
+    let username = element.parentElement.previousSibling.previousSibling.firstChild.value
     let password = element.parentElement.previousSibling.firstChild.value
-    let password1 = element.parentElement.previousSibling.previousSibling.firstChild.value
     let response = await fetch("http://127.0.0.1:8000/auth/token", {
         "method" : "POST",
         "headers" : {
-            "Content-Type" : "Application/json"
+            "Content-Type" : "application/x-www-form-urlencoded"
         },
-        "body" : JSON.stringify({
-            "username" : username,
-            "password" : password
-        })
+        "body" : `username=${username}&password=${password}&scope=&client_id=&client_secret=`
     })
-    console.log(response)
     if (response.status !== 200) {
-        setErrors((await response.json()).detail)
+        let newerrors = await response.json()
+        setErrors(newerrors.detail)
     }
     else {
-        let id = await response.json()
-        console.log("id", id)
+        let data = await response.json()
+        localStorage.setItem("credentials", JSON.stringify(data))
         window.location = "http://127.0.0.1:3000/"
     }
 }
@@ -74,7 +74,8 @@ const LoginForm = () => {
             <h2 className="auth-title">Sign In</h2>
             <InputLine rg="log" placeholder="username"/>
             <InputLine rg="log" type="password" placeholder="password"/>
-            <InputLine onClick={login} className="auth-input disabled-button" type="submit" value="Sign In"/>
+            <InputLine onClick={(event) => login(event, errors, setErrors)} className="auth-input disabled-button" type="submit" value="Sign In"/>
+            <h3 className="dnone"></h3>
         </div>
     );
 }

@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import InputLine from "./input-line";
-import {clear} from "@testing-library/user-event/dist/clear";
 
 async function register(event, errors, setErrors) {
     let element = event.currentTarget
+
+    if (element.classList.contains('disabled-button'))
+        return
+
     let username = element.parentElement.previousSibling.previousSibling.previousSibling.firstChild.value
     let password = element.parentElement.previousSibling.firstChild.value
-    let password1 = element.parentElement.previousSibling.previousSibling.firstChild.value
     let response = await fetch("http://127.0.0.1:8000/auth/create", {
         "method" : "POST",
         "headers" : {
@@ -19,12 +21,21 @@ async function register(event, errors, setErrors) {
     })
 
     if (response.status !== 200) {
-        setErrors((await response.json()).detail)
+        let newerrors = await response.json()
+        console.log(newerrors)
+        setErrors(newerrors.detail)
     }
     else {
         let id = await response.json()
         console.log("id", id)
-        window.location = "http://127.0.0.1:3000/"
+        let successMessage = document.querySelector('.acc-created')
+        if (successMessage.classList.contains('dnone')) {
+            successMessage.classList.remove('dnone')
+            setTimeout(() => {
+                if (!successMessage.classList.contains('dnone'))
+                    successMessage.classList.add('dnone')
+            }, 3000)
+        }
     }
 }
 const SignupForm = () => {
@@ -56,7 +67,7 @@ const SignupForm = () => {
 
         if (password) {
             let element = document.querySelector('[rg="reg"][placeholder="password"]').parentElement
-            element.setAttribute("error", username)
+            element.setAttribute("error", password)
             if (!element.classList.contains('visible-error'))
                 element.classList.add('visible-error')
             errorsExpire.password = setTimeout(() => {
@@ -75,6 +86,7 @@ const SignupForm = () => {
             <InputLine rg="reg" type="password" placeholder="password"/>
             <InputLine rg="reg" type="password" placeholder="verify password"/>
             <InputLine onClick={(event) => register(event, errors, setErrors)} type="submit" value="Sign Up" className="auth-input disabled-button"/>
+            <h3 className="acc-created dnone">Account has been created</h3>
         </div>
     );
 };

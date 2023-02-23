@@ -11,5 +11,6 @@ def get_user_id(token: str = Depends(oauth)):
     user_id = data["payload"]["id"]
     return user_id
 
+
 def get_user(user_id = Depends(get_user_id)):
     return get_user_object(user_id)
